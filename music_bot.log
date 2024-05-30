@@ -1,0 +1,38 @@
+ERROR:utils.logging:Command failed
+ERROR:utils.logging:Failed to get valid voice channel
+INFO:discord.client:logging in using static token
+INFO:discord.gateway:Shard ID None has connected to Gateway (Session ID: a6c27c386666d8e1a070892999358ae3).
+INFO:utils.logging:RoboDoze#7886 is running..
+INFO:discord.voice_client:Connecting to voice...
+INFO:discord.voice_client:Starting voice handshake... (connection attempt 1)
+INFO:discord.voice_client:Voice handshake complete. Endpoint found us-central5033.discord.media
+INFO:discord.voice_client:Disconnecting from voice normally, close code 1000.
+INFO:discord.player:ffmpeg process 231975 has not terminated. Waiting to terminate...
+INFO:discord.player:ffmpeg process 231975 has not terminated. Waiting to terminate...
+ERROR:asyncio:Task exception was never retrieved
+future: <Task finished name='Task-39' coro=<MusicPlayer.player_loop() done, defined at /home/dozy/repos/discord/robo-doze/src/cogs/music.py:105> exception=ValueError('I/O operation on closed file')>
+Traceback (most recent call last):
+  File "/home/dozy/repos/discord/robo-doze/src/cogs/music.py", line 131, in player_loop
+    source.cleanup()
+  File "/home/dozy/.local/lib/python3.11/site-packages/discord/player.py", line 629, in cleanup
+    self.original.cleanup()
+  File "/home/dozy/.local/lib/python3.11/site-packages/discord/player.py", line 226, in cleanup
+    self._kill_process()
+  File "/home/dozy/.local/lib/python3.11/site-packages/discord/player.py", line 203, in _kill_process
+    proc.communicate()
+  File "/usr/lib/python3.11/subprocess.py", line 1196, in communicate
+    stdout = self.stdout.read()
+             ^^^^^^^^^^^^^^^^^^
+ValueError: I/O operation on closed file
+INFO:discord.player:ffmpeg process 231975 should have terminated with a return code of -9.
+INFO:discord.voice_client:The voice handshake is being terminated for Channel ID 806267172723884043 (Guild ID 385602741101264896)
+INFO:discord.gateway:Shard ID None has successfully RESUMED session a6c27c386666d8e1a070892999358ae3.
+INFO:discord.gateway:Shard ID None has successfully RESUMED session a6c27c386666d8e1a070892999358ae3.
+INFO:discord.gateway:Shard ID None has successfully RESUMED session a6c27c386666d8e1a070892999358ae3.
+INFO:discord.gateway:Shard ID None has successfully RESUMED session a6c27c386666d8e1a070892999358ae3.
+INFO:discord.gateway:Shard ID None has successfully RESUMED session a6c27c386666d8e1a070892999358ae3.
+INFO:discord.gateway:Shard ID None has successfully RESUMED session a6c27c386666d8e1a070892999358ae3.
+INFO:discord.voice_client:Connecting to voice...
+INFO:discord.voice_client:Starting voice handshake... (connection attempt 1)
+INFO:discord.voice_client:Voice handshake complete. Endpoint found us-central6158.discord.media
+INFO:discord.gateway:Shard ID None has successfully RESUMED session a6c27c386666d8e1a070892999358ae3.
