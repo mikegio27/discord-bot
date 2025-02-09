@@ -1,4 +1,4 @@
-#!/usr/bin/python3.11
+#!/usr/bin/python3
 import os
 from discord.ext import commands
 from cogs.music  import Music

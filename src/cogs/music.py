@@ -50,10 +50,10 @@ class MusicSource(discord.PCMVolumeTransformer):
         return self.__getattribute__(item)
     
     @classmethod
-    async def create_source(cls, ctx, search: str, *, loop, download=True):
+    async def create_source(cls, ctx, search: str, *, loop, download=False):
         loop = loop or asyncio.get_event_loop()
 
-        to_run = partial(ytdl.extract_info, url=search, download = download )
+        to_run = partial(ytdl.extract_info, url=search, download=download )
         data = await loop.run_in_executor(None, to_run)
         if 'entries' in data:
             data = data['entries'][0]
@@ -67,7 +67,7 @@ class MusicSource(discord.PCMVolumeTransformer):
         else:
             return {'webpage_url': data['webpage_url'], 'requester': ctx.author, 'title': data['title']}
         
-        return cls(discord.FFmpegPCMAudio(source, before_options='-nostdin -reconnect 1 -reconnect_streamed 1 - reconnect_delay_max 5', options='-vn'), data=data, requester=ctx.author)
+        return cls(discord.FFmpegPCMAudio(source, before_options='-nostdin -reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5', options='-f s16le -ar 48000 -ac 2 -vn'), data=data, requester=ctx.author)
 
 
     @classmethod
@@ -81,7 +81,7 @@ class MusicSource(discord.PCMVolumeTransformer):
         to_run = partial(ytdl.extract_info, url=data['webpage_url'], download=False)
         data = await loop.run_in_executor(None, to_run)
 
-        return cls(discord.FFmpegPCMAudio(data['url'], before_options='-nostdin -reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5', options='-vn'), data=data, requester=requester)
+        return cls(discord.FFmpegPCMAudio(data['url'], before_options='-nostdin -reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5', options='-f s16le -ar 48000 -ac 2 -vn'), data=data, requester=requester)
 
 
 class MusicPlayer:
@@ -97,7 +97,7 @@ class MusicPlayer:
         self.next = asyncio.Event()
 
         self.np = None  # Now playing message
-        self.volume = .5
+        self.volume = 1 # start at 100% volume
         self.current = None
 
         ctx.bot.loop.create_task(self.player_loop())
@@ -109,7 +109,7 @@ class MusicPlayer:
             self.next.clear()
 
             try:
-                async with timeout(120):
+                async with timeout(300):
                     source = await self.queue.get()
             except asyncio.TimeoutError:
                 return self.destroy(self._guild)
